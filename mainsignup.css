@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(hdpic-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+/* 
+body::before {
+    content: '';
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-image: url(hdpic-1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+} */
+
+
+
+.row {
+    width: 100%;
+/*    background: linear-gradient(to bottom, rgba(169, 173, 176, 0.8), rgba(223, 227, 230, 0.8));*/
+     background: #f7f6f2; 
+    /* background: rgba(0, 0, 0, 0.6); */
+    height: 37em;
+
+}
+
+.col-1 {
+    width: 50%;
+    float: left;
+
+}
+
+
+.col-left p {
+    border-right: 1px solid grey;
+}
+
+
+
+.form-heading h1 {
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    color: black;
+    margin-bottom: 30px;
+}
+
+.form-1 p {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 0 80px;
+    color: black;
+}
+
+p.doc-head {
+    text-transform: uppercase;
+    color: black;
+    text-decoration: underline;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.form-1 input {
+    width: 80%;
+    margin: 10px 0;
+}
+
+.form-1 input[type=text],
+.form-1 input[type=password],
+.form-1 input[type=email] {
+    border: none;
+    border-bottom: 1px solid black;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    height: 30px;
+
+}
+
+
+.form-1 input[type=text]:hover,
+.form-1 input[type=password]:hover,
+.form-1 input[type=email]:hover {
+    border: none;
+    border-bottom: 1px solid red;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    height: 30px;
+}
+
+.form-1 input[type=text]:focus,
+.form-1 input[type=password]:focus,
+.form-1 input[type=email]:focus {
+    border: none;
+    border-bottom: 1px solid red;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    height: 30px;
+    background-color: #e8eeef;
+}
+
+.form-1 input[type=text]::after,
+.form-1 input[type=password]::after,
+.form-1 input[type=email]::after {
+    border: none;
+    border-bottom: 1px solid red;
+    background: transparent;
+    outline: none;
+    padding: 5px;
+    height: 30px;
+    background-color: none;
+    color: #f24444;
+}
+
+
+.form-1 input[type=submit] {
+    height: 35px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 15px;
+    width: 50%;
+    color: #fff;
+    background: red;
+}
+
+.form-1 input[type=submit]:hover {
+    background: #f24444;
+}
+
+p.already-registered {
+    color: black;
+}
+
+p.already-registered a {
+    text-decoration: none;
+    color: red;
+
+}
+
+p.already-registered a:hover {
+    color: #f24444;
+}
