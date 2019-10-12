@@ -1,3 +1,13 @@
+<!-- <?php 
+$db_user = "root";
+$db_pass = "";
+$db_name = "useraccounts";
+$db = new PDO('mysql:host=localhost;dbname=' . $db_name . ';charset=utf8', $db_user, $db_pass);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+?> -->
+
+
+
 <!DOCTYPE html>
 
 <html>
@@ -59,8 +69,9 @@
            <input type="file" name="image" accept="image/*" required/>
       </p>
       <p>
-      <input type="submit" value="submit" class="submit">
-      <!-- <p class="already-registered">Already register. <a href="login.html">Login</a></p> -->
+      <!-- <input type="submit" value="submit" class="submit"> -->
+      <p class="already-registered"><a href="login.html">Sign-UP</a></p>
+      <p class="already-registered">Already registered? <a href="login.html">Login</a></p>
   </p>
   </div>
 
