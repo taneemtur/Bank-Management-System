@@ -26,11 +26,12 @@ body::before {
 
     text-align: center;
     width: 50%;
-    height: 400px;
+    height: 100%;
     position: inherit;
     margin-left: 27%;
     background: #f7f6f2;
     margin-bottom: 10%;
+
 } 
 
 .form-heading h1 {
@@ -112,7 +113,7 @@ body::before {
     width: 40%;
     color: #fff;
     background: red;
-    margin-left: 30%; 
+    margin-left: 20%; 
 }    
  
 .form-1 input[type=submit]:hover {
