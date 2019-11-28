@@ -186,10 +186,11 @@ include 'includes/dbconnect.php';
                 <div class="col-12">
                     <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <h2>User DashBoard</h2>
+                        <h2>Admin DashBoard</h2>
                     </div>
                 </div>
-                
+                <h3>Admin <?php echo $_SESSION['usr_name']; ?></h3>
+
                 <div class="col-12 mb-70">
                     <div class="row">
                         

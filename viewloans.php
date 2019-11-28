@@ -138,10 +138,11 @@ include_once 'includes/dbconnect.php';
                 <div class="col-12">
                     <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <h2>User DashBoard</h2>
+                        <h2>Admin DashBoard</h2>
                     </div>
                 </div>
-                
+                <h3>Admin <?php echo $_SESSION['usr_name']; ?></h3>
+
                 <div class="col-12 mb-70">
                     <div class="row">
                         
@@ -168,12 +169,12 @@ include_once 'includes/dbconnect.php';
 			</div>
 			<table class="table table-bordered">
 				   		<thead>
-				   			<th>Account no</th>
+				   			<th>Loan ID</th>
 				   			<th>Loan type</th>
 				   			<th>Loan Amount</th>
-				   			<th>Intrest</th>
-				   			<th>Issued date</th>
-				   			<th>Remaining amount to be paid</th>
+				   			<th>Customer ID</th>
+				   			<th>Interest</th>
+				   			<th>Dated</th>
 				   			</thead>
 			<?php 
 
@@ -187,12 +188,12 @@ include_once 'includes/dbconnect.php';
 					
 					    <tbody>
 					      <tr>
-					        <td>'.$rows['accno'].'</td>
+					        <td>'.$rows['loanid'].'</td>
 					        <td>'.$rows['loantype'].'</td>
-					        <td>'.$rows['loanamt'].'</td>
+                            <td>'.$rows['loanamount'].'</td>
+                            <td>'.$rows['customerid'].'</td>
 					        <td>'.$rows['interest'].'</td>
-					        <td>'.$rows['loandate'].'</td>
-					        <td>'.$rows['loan_rem'].'</td>
+					        <td>'.$rows['startdate'].'</td>
 					      </tr>
 					    </tbody>
 			 		

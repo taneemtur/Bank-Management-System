@@ -1,8 +1,8 @@
 <?php
 session_start();
 include_once 'includes/dbconnect.php';
-$id = addslashes($_SESSION['usr_id']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +44,7 @@ $id = addslashes($_SESSION['usr_id']);
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a><img src="img/core-img/logo.png" alt=""></a>
+                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -80,7 +80,7 @@ $id = addslashes($_SESSION['usr_id']);
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <!-- <li><a href="index.html">Home</a></li>
+                                    <!-- <li><a href="index.php">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -139,10 +139,10 @@ $id = addslashes($_SESSION['usr_id']);
                 <div class="col-12">
                     <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <h2>User DashBoard</h2>
+                        <h2>Admin DashBoard</h2>
                     </div>
                 </div>
-                <h3>User <?php echo $_SESSION['usr_name']; ?></h3>
+                <h3>Admin <?php echo $_SESSION['usr_name']; ?></h3>
 
                 <div class="col-12 mb-70">
                     <div class="row">
@@ -153,7 +153,7 @@ $id = addslashes($_SESSION['usr_id']);
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                                 <div class="single-icons mb-30">
                                     <i class="icon-diamond"></i>
-                                    <a href="transactions.php"><span>Transactions</span></a>
+                                    <a href="card.html"><span>Debit Card</span></a>
                                     
                                 </div>
                             </div>
@@ -161,62 +161,25 @@ $id = addslashes($_SESSION['usr_id']);
                         
                             
                         
-                            <div class="container">
-	<article class="row">
-		<section class="col-lg-8">
-			<div class="page-header">
-				<h2>Transaction Details</h2>
-			</div>
-				<table class="table table-bordered">
-				   		<thead>
-                               <th>Transaction ID</th>
-                               <th>Payment Date</th>
-                               <th>Sender ID</th>
-                               <th>Receiver ID</th>
-				   			<th>Amount</th>
-				   			<th>Status</th>
-				   			</thead>
-	<?php
-	
-		$in_sql = "SELECT * FROM transactions WHERE payeeid = $id";
-		$ru_sql = mysqli_query($con, $in_sql);
+                                <div class="card" style="width: 18rem;">
+                                        
+                                        <div class="card-body">
+                                          <h5 class="card-title">Account Details</h5>
+                                          <p class="card-text">Account Balance: </p>
+                                        </div>
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item">Transaction Limit: </li>
+                                          <li class="list-group-item">Debit-Card: </li>
+                                        
+                                        </ul>
+                                        <div class="card-body">
+                                          <a href="#" class="card-link">Send Money</a>
+                                          <a href="admin.php" class="card-link">Dashboard</a>
+                                        </div>
+                                      </div>
 
-		$rows = mysqli_fetch_array($ru_sql);
-		// $accno = $rows['payeeid'];
 
-		// $ins_sql = "SELECT * FROM transactions WHERE receiveid = '$accno'";
-		// $run_sql = mysqli_query($con, $ins_sql);
-		while($rows = mysqli_fetch_array($ru_sql)){
-
-			echo '
-
-				<tbody>
-					      <tr>
-					        <td>'.$rows['transactionid'].'</td>
-                            <td>'.$rows['paymentdate'].'</td>
-                            <td>'.$rows['payeeid'].'</td>
-                            <td>'.$rows['receiveid'].'</td>
-                            <td>'.$rows['amount'].'</td>
-                            <td>'.$rows['paymentstate'].'</td>
-					      </tr>
-					    </tbody>
-				
-			';
-
-		}
-    ?>
-    
-    </table>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            
-                            <i class="icon-purse"></i>
-                         <a href="customer.php"> <span>Dash Board</span></a>  
                         </div>
-
-</section></article></div>
-		
-    
-    
                     
                         
                         
@@ -232,117 +195,7 @@ $id = addslashes($_SESSION['usr_id']);
     </section>
     <!-- ##### Elements Area End ##### -->
 
-    <!-- ##### Newsletter Area Start ###### -->
-    <section class="newsletter-area section-padding-100 bg-img jarallax" style="background-image: url(img/bg-img/6.jpg);">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-sm-10 col-lg-8">
-                    <div class="nl-content text-center">
-                        <h2>Subscribe to our newsletter</h2>
-                        <form action="#" method="post">
-                            <input type="email" name="nl-email" id="nlemail" placeholder="Your e-mail">
-                            <button type="submit">Subscribe</button>
-                        </form>
-                        <!-- <p>Curabitur elit turpis, maximus quis ullamcorper sed, maximus eu neque. Cras ultrices erat nec auctor blandit.</p> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </section>
-    <!-- ##### Newsletter Area End ###### -->
-
-    <!-- ##### Footer Area Start ##### -->
-    <footer class="footer-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
-
-                <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-100">
-                        <h5 class="widget-title">About Us</h5>
-                        <!-- Nav -->
-                        <nav>
-                            <ul>
-                                <li><a href="index.php">Homepage</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="services.html">Services &amp; Offers</a></li>
-                                <!-- <li><a href="#">Portfolio Presentation</a></li> -->
-                                <li><a href="post.html">The News</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- Single Footer Widget -->
-                <!-- <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-100">
-                        <h5 class="widget-title">Solutions</h5>
-                        
-                        <nav>
-                            <ul>
-                                <li><a href="#">Our Loans</a></li>
-                                <li><a href="#">Trading &amp; Commerce</a></li>
-                                <li><a href="#">Banking &amp; Private Equity</a></li>
-                                <li><a href="#">Industrial &amp; Factory</a></li>
-                                <li><a href="#">Financial Solutions</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div> -->
-
-                <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-100">
-                        <h5 class="widget-title">Latest News</h5>
-
-                        <!-- Single News Area -->
-                        <div class="single-latest-news-area d-flex align-items-center">
-                            <div class="news-thumbnail">
-                                <img src="img/bg-img/7.jpg" alt="">
-                            </div>
-                            <div class="news-content">
-                                <a href="#">How to get the best loan?</a>
-                                <div class="news-meta">
-                                    <a href="#" class="post-author"><img src="img/core-img/pencil.png" alt=""> Jane Smith</a>
-                                    <a href="#" class="post-date"><img src="img/core-img/calendar.png" alt=""> April 26</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single News Area -->
-                        <div class="single-latest-news-area d-flex align-items-center">
-                            <div class="news-thumbnail">
-                                <img src="img/bg-img/8.jpg" alt="">
-                            </div>
-                            <div class="news-content">
-                                <a href="#">A new way to get a loan</a>
-                                <div class="news-meta">
-                                    <a href="#" class="post-author"><img src="img/core-img/pencil.png" alt=""> Jane Smith</a>
-                                    <a href="#" class="post-date"><img src="img/core-img/calendar.png" alt=""> April 26</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single News Area -->
-                        <div class="single-latest-news-area d-flex align-items-center">
-                            <div class="news-thumbnail">
-                                <img src="img/bg-img/9.jpg" alt="">
-                            </div>
-                            <div class="news-content">
-                                <a href="#">Finance you home</a>
-                                <div class="news-meta">
-                                    <a href="#" class="post-author"><img src="img/core-img/pencil.png" alt=""> Jane Smith</a>
-                                    <a href="#" class="post-date"><img src="img/core-img/calendar.png" alt=""> April 26</a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    
         <!-- Copywrite Area -->
         <div class="copywrite-area">
             <div class="container">

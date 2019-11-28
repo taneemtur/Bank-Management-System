@@ -143,7 +143,8 @@ $id = addslashes($_SESSION['usr_id']);
                         <h2>User DashBoard</h2>
                     </div>
                 </div>
-                
+                <h3>User <?php echo $_SESSION['usr_name']; ?></h3>
+
                 <div class="col-12 mb-70">
                     <div class="row">
                         
@@ -234,7 +235,7 @@ $id = addslashes($_SESSION['usr_id']);
                             <input type="email" name="nl-email" id="nlemail" placeholder="Your e-mail">
                             <button type="submit">Subscribe</button>
                         </form>
-                        <p>Curabitur elit turpis, maximus quis ullamcorper sed, maximus eu neque. Cras ultrices erat nec auctor blandit.</p>
+                        <!-- <p>Curabitur elit turpis, maximus quis ullamcorper sed, maximus eu neque. Cras ultrices erat nec auctor blandit.</p> -->
                     </div>
                 </div>
             </div>
@@ -255,32 +256,16 @@ $id = addslashes($_SESSION['usr_id']);
                         <!-- Nav -->
                         <nav>
                             <ul>
-                                <li><a href="#">Homepage</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Services &amp; Offers</a></li>
-                                <li><a href="#">Portfolio Presentation</a></li>
-                                <li><a href="#">The News</a></li>
+                                <li><a href="index.php">Homepage</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="services">Services &amp; Offers</a></li>
+                                <!-- <li><a href="#">Portfolio Presentation</a></li> -->
+                                <li><a href="post.html">The News</a></li>
                             </ul>
                         </nav>
                     </div>
                 </div>
 
-                <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-footer-widget mb-100">
-                        <h5 class="widget-title">Solutions</h5>
-                        <!-- Nav -->
-                        <nav>
-                            <ul>
-                                <li><a href="#">Our Loans</a></li>
-                                <li><a href="#">Trading &amp; Commerce</a></li>
-                                <li><a href="#">Banking &amp; Private Equity</a></li>
-                                <li><a href="#">Industrial &amp; Factory</a></li>
-                                <li><a href="#">Financial Solutions</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
 
                 <!-- Single Footer Widget -->
                 <div class="col-12 col-sm-6 col-lg-3">

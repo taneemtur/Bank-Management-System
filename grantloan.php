@@ -22,7 +22,7 @@ include 'includes/dbconnect.php';
 
 			$rows = mysqli_fetch_array($ru_sql);
 
-			$balance = $rows['accbalance'];
+			$balance = $rows['accountbalance'];
 
 		
 			$ltype = $_POST['ltype'];
@@ -33,14 +33,15 @@ include 'includes/dbconnect.php';
 				$total = $balance + $lamount;
 
 				$ins_sql = "UPDATE accounts
-								SET accbalance = $total
+								SET accountbalance = $total
 								WHERE accno = '$accno'";
 
 					$run_sql = mysqli_query($con, $ins_sql);
 
 				$linterest = $_POST['linterest'];
 				$ldate = date('y:m:d');
-				$ins_sql = "INSERT INTO loan (accno, loantype, loanamt, loan_rem, interest, loandate) VALUES ('".$accno."', '".$ltype."', '".$lamount."', '".$lamount."', '".$linterest."', '".$ldate."')";
+				$ins_sql = "INSERT INTO loan (loantype, loanamount, interest, startdate) VALUES 
+                ('".$ltype."', '".$lamount."',  '".$linterest."', '".$ldate."')";
 				$run_sql = mysqli_query($con,$ins_sql);
 
 
@@ -190,10 +191,11 @@ include 'includes/dbconnect.php';
                 <div class="col-12">
                     <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <h2>User DashBoard</h2>
+                        <h2>Admin DashBoard</h2>
                     </div>
                 </div>
-                
+                <h3>Admin <?php echo $_SESSION['usr_name']; ?></h3>
+
                 <div class="col-12 mb-70">
                     <div class="row">
                         

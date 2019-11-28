@@ -196,7 +196,7 @@ include 'includes/dbconnect.php';
                                     </div>
                                     <div class="text">
                                         <h5>All the loans</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
+                                        <!-- <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +209,7 @@ include 'includes/dbconnect.php';
                                     </div>
                                     <div class="text">
                                         <h5>Easy and fast answer</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
+                                        <!-- <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -222,7 +222,7 @@ include 'includes/dbconnect.php';
                                     </div>
                                     <div class="text">
                                         <h5>No additional papers</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
+                                        <!-- <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -244,11 +244,11 @@ include 'includes/dbconnect.php';
                         <!-- Nav -->
                         <nav>
                             <ul>
-                                <li><a href="#">Homepage</a></li>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Services &amp; Offers</a></li>
-                                <li><a href="#">Portfolio Presentation</a></li>
-                                <li><a href="#">The News</a></li>
+                                <li><a href="index.php">Homepage</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="services.html">Services &amp; Offers</a></li>
+                                <!-- <li><a href="#">Portfolio Presentation</a></li> -->
+                                <li><a href="post.html">The News</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -261,11 +261,11 @@ include 'includes/dbconnect.php';
                         <!-- Nav -->
                         <nav>
                             <ul>
-                                <li><a href="#">Our Loans</a></li>
-                                <li><a href="#">Trading &amp; Commerce</a></li>
-                                <li><a href="#">Banking &amp; Private Equity</a></li>
-                                <li><a href="#">Industrial &amp; Factory</a></li>
-                                <li><a href="#">Financial Solutions</a></li>
+                                <li><a href="login1.php">Our Loans</a></li>
+                                <li><a href="login1.php">Trading &amp; Commerce</a></li>
+                                <li><a href="login1.php">Banking &amp; Private Equity</a></li>
+                                <!-- <li><a href="#">Industrial &amp; Factory</a></li> -->
+                                <li><a href="login1.php">Financial Solutions</a></li>
                             </ul>
                         </nav>
                     </div>
