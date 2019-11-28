@@ -1,3 +1,7 @@
+<?php
+session_start();
+include_once 'includes/dbconnect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +43,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -75,7 +79,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <!-- <li><a href="index.php">Home</a></li>
+                                    <!-- <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -95,7 +99,9 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
+                            <!-- <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a> -->
+                            <?php if (isset($_SESSION['usr_id']))  ?>
+				            <li><a href="logout.php">Log Out</a></li>
                         </div>
                     </nav>
                 </div>
@@ -145,7 +151,7 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                                 <div class="single-icons mb-30">
                                     <i class="icon-diamond"></i>
-                                    <a href="card.html"><span>Debit Card</span></a>
+                                    <a href="viewloans.php"><span>View Loans</span></a>
                                     
                                 </div>
                             </div>
@@ -153,25 +159,66 @@
                         
                             
                         
-                                <div class="card" style="width: 18rem;">
-                                        
-                                        <div class="card-body">
-                                          <h5 class="card-title">Account Details</h5>
-                                          <p class="card-text">Account Balance: </p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">Transaction Limit: </li>
-                                          <li class="list-group-item">Debit-Card: </li>
-                                        
-                                        </ul>
-                                        <div class="card-body">
-                                          <a href="#" class="card-link">Send Money</a>
-                                          <a href="admin.php" class="card-link">Dashboard</a>
-                                        </div>
-                                      </div>
+                            <div class="container">
+                            <div class="container">
+                            <article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Loans information</h2>
+			</div>
+			<table class="table table-bordered">
+				   		<thead>
+				   			<th>Account no</th>
+				   			<th>Loan type</th>
+				   			<th>Loan Amount</th>
+				   			<th>Intrest</th>
+				   			<th>Issued date</th>
+				   			<th>Remaining amount to be paid</th>
+				   			</thead>
+			<?php 
 
+				$ins_sql = "SELECT * FROM loan";
+				$run_sql = mysqli_query($con, $ins_sql);
 
+				while($rows = mysqli_fetch_array($run_sql)){
+
+					echo '
+
+					
+					    <tbody>
+					      <tr>
+					        <td>'.$rows['accno'].'</td>
+					        <td>'.$rows['loantype'].'</td>
+					        <td>'.$rows['loanamt'].'</td>
+					        <td>'.$rows['interest'].'</td>
+					        <td>'.$rows['loandate'].'</td>
+					        <td>'.$rows['loan_rem'].'</td>
+					      </tr>
+					    </tbody>
+			 		
+
+					';
+				}
+				?>
+				 </table>
+
+    </article>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            
+                            <i class="icon-purse"></i>
+                         <a href="admin.php"> <span>Dash Board</span></a>  
                         </div>
+</section>
+	
+
+</div>
+
+</div>
+	
+		
+		
+    
+    
                     
                         
                         
@@ -187,7 +234,6 @@
     </section>
     <!-- ##### Elements Area End ##### -->
 
-    
         <!-- Copywrite Area -->
         <div class="copywrite-area">
             <div class="container">

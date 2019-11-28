@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once 'includes/dbconnect.php';
+$id = addslashes($_SESSION['usr_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +44,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -75,7 +80,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <!-- <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -85,9 +90,9 @@
                                                 <li><a href="#">Portfolio 3</a></li>
                                             </ul>
                                         </li>
-                                    <li><a href="post.html">Blog</a></li>
+                                    <li><a href="post.html">Blog</a></li> -->
                                     <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="login.html">Login</a></li>
+                                    <!-- <li><a href="login.html">Login</a></li> -->
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -95,7 +100,9 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
+                            <!-- <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a> -->
+                            <?php if (isset($_SESSION['usr_id']))  ?>
+				            <li><a href="logout.php">Log Out</a></li>
                         </div>
                     </nav>
                 </div>
@@ -140,39 +147,75 @@
                     <div class="row">
                         
                         
+                          
                         <!-- Single Icons -->
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-purse"></i>
-                             <a href="accountdetails.html"> <span>Account Details</span></a>  
+                                <div class="single-icons mb-30">
+                                    <i class="icon-diamond"></i>
+                                    <a href="loaninfo.php"><span>Loan Info</span></a>
+                                    
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        
                             
                         
-                                <div class="card" style="width: 18rem;">
-                                        <img src="..." class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                          <h5 class="card-title">Account Title</h5>
-                                          <p class="card-text">Account Balance: </p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">Account Name: </li>
-                                          <li class="list-group-item">Account Number: </li>
-                                          <li class="list-group-item">Phone NUmber: </li>
-                                          <li class="list-group-item">CNIC: </li>
-                                          <li class="list-group-item">Address: </li>
-                                          
-                                        </ul>
-                                        <div class="card-body">
-                                          <a href="#" class="card-link">Other Options</a>
-                                          <a href="user_account.html" class="card-link">Dashboard</a>
-                                        </div>
-                                      </div>
+                            <div class="container">
+                            <div class="container">
+                            <article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Loan info</h2>
+			</div>
+				<table class="table table-bordered">
+				   		<thead>
+				   			<th>Loan type</th>
+				   			<th>Loan Amount</th>
+				   			<th>Customer ID</th>
+				   			<th>Interest</th>
+				   			<th>Issued Date</th>
 
+				   			</thead>
+	<?php
+	
+		$in_sql = "SELECT * FROM accounts WHERE customerid = $id";
+		$ru_sql = mysqli_query($con, $in_sql);
 
+		$rows = mysqli_fetch_array($ru_sql);
+		$accno = $rows['accno'];
+
+		$ins_sql = "SELECT * FROM loan WHERE loanid = '$accno'";
+		$run_sql = mysqli_query($con, $ins_sql);
+		while($rows = mysqli_fetch_array($run_sql)){
+
+			echo '
+
+				<tbody>
+					      <tr>
+					        <td>'.$rows['loantype'].'</td>
+					        <td>'.$rows['loanamount'].'</td>
+					        <td>'.$rows['customerid'].'</td>
+					        <td>'.$rows['interest'].'</td>
+					        <td>'.$rows['startdate'].'</td>
+					      </tr>
+					    </tbody>
+				
+			';
+
+		}
+	?>
+    </table>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            
+                            <i class="icon-purse"></i>
+                         <a href="customer.php"> <span>Dash Board</span></a>  
                         </div>
+
+</section></article></div>
+		
+		
+    
+    
                     
                         
                         

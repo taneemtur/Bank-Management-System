@@ -1,3 +1,8 @@
+<?php
+session_start();
+include_once 'includes/dbconnect.php';
+$id = addslashes($_SESSION['usr_id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +44,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -75,7 +80,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <!-- <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -85,10 +90,9 @@
                                                 <li><a href="#">Portfolio 3</a></li>
                                             </ul>
                                         </li>
-                                    <li><a href="post.html">Blog</a></li>
+                                    <li><a href="post.html">Blog</a></li> -->
                                     <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="user_account.html">Dashboard</a></li>
+                                    <!-- <li><a href="login.html">Login</a></li> -->
                                 </ul>
                             </div>
                             <!-- Nav End -->
@@ -96,7 +100,9 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
+                            <!-- <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a> -->
+                            <?php if (isset($_SESSION['usr_id']))  ?>
+				            <li><a href="logout.php">Log Out</a></li>
                         </div>
                     </nav>
                 </div>
@@ -105,191 +111,121 @@
     </header>
     <!-- ##### Header Area End ##### -->
 
-    <!-- ##### Hero Area Start ##### -->
-    <div class="hero-area">
-        <div class="hero-slideshow owl-carousel">
-
-            <!-- Single Slide -->
-            <div class="single-slide bg-img">
-                <!-- Background Image-->
-                <div class="slide-bg-img bg-img bg-overlay" style="background-image: url(img/bg-img/1.jpg);"></div>
-                <!-- Welcome Text -->
-                <div class="container h-100">
-                    <div class="row h-100 align-items-center justify-content-center">
-                        <div class="col-12 col-lg-9">
-                            <div class="welcome-text text-center">
-                                <h2 data-animation="fadeInUp" data-delay="300ms"><span> BANKING</span> Solution</h2>
-                                <!-- <p data-animation="fadeInUp" data-delay="500ms">Vestibulum eu vehicula elit, nec elementum orci. Praesent aliquet ves tibulum tempus. Pellentesque posuere pharetra turpis, eget finibus erat porta placerat.</p> -->
-                                <a href="tutorreg.html" class="btn credit-btn mt-50" data-animation="fadeInUp" data-delay="700ms">Sign-up</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Slide Duration Indicator -->
-                <div class="slide-du-indicator"></div>
-            </div>    
-
-        </div>
-    </div>
-    <!-- ##### Hero Area End ##### -->
-
-    <!-- ##### Features Area Start ###### -->
-    <section class="features-area section-padding-100-0">
-        <div class="container">
-            <div class="row align-items-end">
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-features-area mb-100 wow fadeInUp" data-wow-delay="100ms">
-                        <!-- Section Heading -->
-                        <div class="section-heading">
-                            <div class="line"></div>
-                            <p>Take look at our</p>
-                            <h2>Our Services</h2>
-                        </div>
-                        <h6>In vitae nisi aliquam, scelerisque leo a, volutpat sem. Viva mus rutrum dui fermentum eros hendrerit.</h6>
-                        <a href="#" class="btn credit-btn mt-50">Discover</a>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-features-area mb-100 wow fadeInUp" data-wow-delay="300ms">
-                        <img src="img/bg-img/2.jpg" alt="">
-                        <h5>We take care of you</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-features-area mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <img src="img/bg-img/3.jpg" alt="">
-                        <h5>No documents needed</h5>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-lg-3">
-                    <div class="single-features-area mb-100 wow fadeInUp" data-wow-delay="700ms">
-                        <img src="img/bg-img/4.jpg" alt="">
-                        <h5>Fast &amp; easy loans</h5>
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <section class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url(img/bg-img/13.jpg);">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12">
+                    <div class="breadcrumb-content">
+                        <h2>Dashboard</h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">DashBoard</li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ##### Features Area End ###### -->
+    <!-- ##### Breadcrumb Area End ##### -->
 
-    
-    <!-- ##### Call To Action Start ###### -->
-    <section class="cta-2-area wow fadeInUp" data-wow-delay="100ms">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <!-- Cta Content -->
-                    <div class="cta-content d-flex flex-wrap align-items-center justify-content-between">
-                        <div class="cta-text">
-                            <h4>Are you in need for a loan? Get in touch with us.</h4>
-                        </div>
-                        <div class="cta-btn">
-                            <a href="#" class="btn credit-btn box-shadow">Apply Here</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Call To Action End ###### -->
+    <!-- ##### Elements Area Start ##### -->
+    <section class="elements-area section-padding-100-0">
+       
 
-    <!-- ##### Services Area Start ###### -->
-    <section class="services-area section-padding-100-0">
-        <div class="container">
-            <div class="row">
+                <!-- ========== Web Icons ========== -->
                 <div class="col-12">
-                    <!-- Section Heading -->
-                    <div class="section-heading text-center mb-100 wow fadeInUp" data-wow-delay="100ms">
+                    <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <p>Take look at our</p>
-                        <h2>Our services</h2>
+                        <h2>User DashBoard</h2>
                     </div>
                 </div>
-            </div>
+                
+                <div class="col-12 mb-70">
+                    <div class="row">
+                        
+                        
+                          
+                        <!-- Single Icons -->
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                <div class="single-icons mb-30">
+                                    <i class="icon-diamond"></i>
+                                    <a href="transactions.php"><span>Transactions</span></a>
+                                    
+                                </div>
+                            </div>
+                            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        
+                            
+                        
+                            <div class="container">
+	<article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Transaction Details</h2>
+			</div>
+				<table class="table table-bordered">
+				   		<thead>
+				   			<th>Payee name</th>
+				   			<th>Amount</th>
+				   			<th>Transaction date</th>
+				   			</thead>
+	<?php
+	
+		$in_sql = "SELECT * FROM accounts WHERE customerid = $id";
+		$ru_sql = mysqli_query($con, $in_sql);
 
-            <div class="row">
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="200ms">
-                        <div class="icon">
-                            <i class="icon-profits"></i>
-                        </div>
-                        <div class="text">
-                            <h5>All the loans</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
-                    </div>
-                </div>
+		$rows = mysqli_fetch_array($ru_sql);
+		$accno = $rows['accno'];
 
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="300ms">
-                        <div class="icon">
-                            <i class="icon-money-1"></i>
-                        </div>
-                        <div class="text">
-                            <h5>Easy and fast answer</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
-                    </div>
-                </div>
+		$ins_sql = "SELECT * FROM transactions WHERE payeeid = '$accno'";
+		$run_sql = mysqli_query($con, $ins_sql);
+		while($rows = mysqli_fetch_array($run_sql)){
 
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="400ms">
-                        <div class="icon">
-                            <i class="icon-coin"></i>
-                        </div>
-                        <div class="text">
-                            <h5>No additional papers</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
-                    </div>
-                </div>
+			echo '
 
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="500ms">
-                        <div class="icon">
-                            <i class="icon-smartphone-1"></i>
-                        </div>
-                        <div class="text">
-                            <h5>Secure financial services</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
-                    </div>
-                </div>
+				<tbody>
+					      <tr>
+					        <td>'.$rows['payee_name'].'</td>
+					        <td>'.$rows['amount'].'</td>
+					        <td>'.$rows['trans_date'].'</td>
+					      </tr>
+					    </tbody>
+				
+			';
 
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="600ms">
-                        <div class="icon">
-                            <i class="icon-diamond"></i>
+		}
+    ?>
+    
+    </table>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            
+                            <i class="icon-purse"></i>
+                         <a href="customer.php"> <span>Dash Board</span></a>  
                         </div>
-                        <div class="text">
-                            <h5>Good investments</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Single Service Area -->
-                <div class="col-12 col-md-6 col-lg-4">
-                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="700ms">
-                        <div class="icon">
-                            <i class="icon-piggy-bank"></i>
-                        </div>
-                        <div class="text">
-                            <h5>Accumulation goals</h5>
-                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                        </div>
+</section></article></div>
+		
+    
+    
+                    
+                        
+                        
+            
                     </div>
                 </div>
+                
             </div>
         </div>
+        
+                    
+                  
     </section>
-    <!-- ##### Services Area End ###### -->
-<!-- ##### Newsletter Area Start ###### -->
+    <!-- ##### Elements Area End ##### -->
+
+    <!-- ##### Newsletter Area Start ###### -->
     <section class="newsletter-area section-padding-100 bg-img jarallax" style="background-image: url(img/bg-img/6.jpg);">
         <div class="container">
             <div class="row justify-content-center">
@@ -305,6 +241,7 @@
                 </div>
             </div>
         </div>
+        
     </section>
     <!-- ##### Newsletter Area End ###### -->
 
@@ -419,7 +356,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area Start ##### -->
-
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>

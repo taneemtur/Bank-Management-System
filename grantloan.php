@@ -1,3 +1,59 @@
+<?php
+session_start();
+include 'includes/dbconnect.php';
+	
+	$success = "";
+
+	if(isset($_POST['submit'])){
+
+			$accno = $_POST['accno'];
+			
+
+			$in_sql = "SELECT * FROM accounts WHERE accno = '$accno'";
+			$ru_sql = mysqli_query($con, $in_sql);
+			$temp = mysqli_affected_rows($con);
+			if($temp>0){
+
+				$success = "Loan granted successfully!";
+			}else{
+
+				$success = "Account number doesn't exist!";
+			}
+
+			$rows = mysqli_fetch_array($ru_sql);
+
+			$balance = $rows['accbalance'];
+
+		
+			$ltype = $_POST['ltype'];
+			$lamount = $_POST['lamount'];
+
+			if($lamount>0){
+
+				$total = $balance + $lamount;
+
+				$ins_sql = "UPDATE accounts
+								SET accbalance = $total
+								WHERE accno = '$accno'";
+
+					$run_sql = mysqli_query($con, $ins_sql);
+
+				$linterest = $_POST['linterest'];
+				$ldate = date('y:m:d');
+				$ins_sql = "INSERT INTO loan (accno, loantype, loanamt, loan_rem, interest, loandate) VALUES ('".$accno."', '".$ltype."', '".$lamount."', '".$lamount."', '".$linterest."', '".$ldate."')";
+				$run_sql = mysqli_query($con,$ins_sql);
+
+
+			}else{
+
+				$success = "You're fired!";
+			}
+		
+		
+	}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +95,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -75,7 +131,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <!-- <li><a href="index.php">Home</a></li>
+                                    <!-- <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -95,7 +151,9 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
+                            <!-- <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a> -->
+                            <?php if (isset($_SESSION['usr_id']))  ?>
+				            <li><a href="logout.php">Log Out</a></li>
                         </div>
                     </nav>
                 </div>
@@ -145,7 +203,7 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                                 <div class="single-icons mb-30">
                                     <i class="icon-diamond"></i>
-                                    <a href="card.html"><span>Debit Card</span></a>
+                                    <a href="grantloan.php"><span>Grant Loan</span></a>
                                     
                                 </div>
                             </div>
@@ -153,25 +211,67 @@
                         
                             
                         
-                                <div class="card" style="width: 18rem;">
-                                        
-                                        <div class="card-body">
-                                          <h5 class="card-title">Account Details</h5>
-                                          <p class="card-text">Account Balance: </p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">Transaction Limit: </li>
-                                          <li class="list-group-item">Debit-Card: </li>
-                                        
-                                        </ul>
-                                        <div class="card-body">
-                                          <a href="#" class="card-link">Send Money</a>
-                                          <a href="admin.php" class="card-link">Dashboard</a>
-                                        </div>
-                                      </div>
-
-
+                            <div class="container">
+                            <div class="container">
+                            <article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Grant loan</h2>
+			</div>
+			<form class="form-horizontal" action="grantloan.php" method="post" role="form">
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Account no *</label>
+						<div class="col-sm-8">
+							<input type="text" name="accno" class="form-control" placeholder="Enter account no" id="loanid" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="name" class="col-sm-3 control-label">Loan type *</label>
+						<div class="col-sm-8">
+							<input type="text" name="ltype" class="form-control" placeholder="Enter the loan type" id="loantype" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Loan amount *</label>
+						<div class="col-sm-8">
+							<input type="text" name="lamount" class="form-control" placeholder="Enter the amount" id="loanamount" required>
+						</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Interest(%) *</label>
+						<div class="col-sm-8">
+							<input type="text" name="linterest" class="form-control" placeholder="Enter interest percentage" id="linterest" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-8">
+					<input type="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-8">
+					<h4><?php echo $success ?></h4>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            
+                            <i class="icon-purse"></i>
+                         <a href="admin.php"> <span>Dash Board</span></a>  
                         </div>
+
+
+	</article>
+	
+
+</div>
+	
+		
+		
+    
+    
                     
                         
                         
@@ -186,9 +286,7 @@
                   
     </section>
     <!-- ##### Elements Area End ##### -->
-
-    
-        <!-- Copywrite Area -->
+    <!-- Copywrite Area -->
         <div class="copywrite-area">
             <div class="container">
                 <div class="row">

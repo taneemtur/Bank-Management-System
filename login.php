@@ -1,3 +1,39 @@
+<?php
+session_start();
+
+if(isset($_SESSION['usr_id'])!="") {
+	header("Location: index.php");
+}
+
+include 'includes/dbconnect.php';
+
+//check if form is submitted
+if (isset($_POST['login'])) {
+
+	$email = mysqli_real_escape_string($con, $_POST['email']);
+	$password = mysqli_real_escape_string($con, $_POST['password']);
+	$result = mysqli_query($con, "SELECT * FROM employees WHERE emailid = '" . $email. "' and password = '" . $password . "'");
+
+	if ($row = mysqli_fetch_array($result)) {
+		$_SESSION['usr_id'] = $row['empid'];
+		$_SESSION['usr_name'] = $row['empname'];
+
+		if($_SESSION['usr_id']==1){
+
+            
+			header("Location: customer.php");
+		}else{
+			
+            header("Location: admin.php");
+
+		}
+	} else {
+		$errormsg = "Incorrect Email or Password!!!";
+	}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +52,8 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="style.css">
+    <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" a="all">
+<link href="login.css" rel="stylesheet" type="text/css" a="all">
 
 </head>
 
@@ -39,7 +77,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a href="index.php"><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -58,172 +96,129 @@
                 <div class="container">
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="creditNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
                         <!-- Menu -->
                         <div class="classy-menu">
+
+                            <!-- Close Button -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a href="index.php">Home</a></li>
+                                    <li><a href="about.html">About Us</a></li>                                  
+                                    <li><a href="contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                            <!-- Nav End -->
                         </div>
+
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="index.html"> LOG-OUT </a>
+                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
                         </div>
                     </nav>
                 </div>
             </div>
         </div>
-
     </header>
     <!-- ##### Header Area End ##### -->
-                <!-- ========== Web Icons ========== -->
+
+    
+    <div class="container">
+        <div class="row-1">
+    <div class="form-1">
+        
+        <form method="post" id="regForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="registrationForm" autocomplete="off">
+           
+                <div class="form-heading"><h1>Admin Log in</h1></div>
+                
+                <p>Email: <br>
+                    <input type="email" name="email" placeholder="Email" id="email" required>
+                    </p>
+    
+                <p>Password: <br>
+            <input type="password" name="password" placeholder="Password" id="password" required>
+            </p>
+        <!-- <input  type="submit" value="submit" class="submit"> -->
+        <input type="submit" name = "login" value="login" class="submit" style = "margin-right: 30%; ">
+        <!-- <p class="not-registered"><a href="user_account.html">Submit</a></p> -->
+            <p class="not-registered">Login as Customer <a href="login1.php">Login</a></p>
+        
+        </form> 
+        <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
+
+    </div>
+    </div> 
+    </div>  
+    <div class="clear"></div>
+    </div>
+    
+   
+    
+   
+    <!-- ##### Call To Action End ###### -->
+
+    <!-- ##### Services Area Start ###### -->
+    <section class="services-area section-padding-100-0">
+        <div class="container">
+            <div class="row">
                 <div class="col-12">
-                    <div class="elements-title mb-30">
-                          <section class="elements-area section-padding-100-0">
-                        <h2>User DashBoard</h2>
+                    <!-- Section Heading -->
+                    <div class="section-heading text-center mb-100 wow fadeInUp" data-wow-delay="100ms">
+                        <h2>Our services</h2>
                     </div>
                 </div>
-                
-                <div class="col-12 mb-70">
-                    <div class="row">                        
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-purse"></i>
-                             <a href="accountdetails.html"> <span>Account Details</span></a>  
-                            </div>
+            </div>
+            <div class="row">
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="200ms">
+                        <div class="icon">
+                            <i class="icon-profits"></i>
                         </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-diamond"></i>
-                                <a href="priviliges.html"><span>Priviliges</span></a>
-                                
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-smartphone-1"></i>
-                                <a href="Fundtransfer.html"><span>Fund Transfer</span></a> 
-                                
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-check"></i>
-                                <a href="#"><span>Check Information</span></a> 
-                               
-                            </div>
-                        </div>                        
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                           
-                             <i class="icon-invoice"></i>
-                             <a href="#"><span>Bank statement</span></a> 
-                            
-                            </div>
-                        </div>   
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-smartphone"></i>
-                                <a href="#"><span>Mobile Banking</span></a> 
-                        
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-calculator"></i>
-                                <a href="#"><span>Loan Calculator</span></a> 
-                                
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-atm-machine-1"></i>
-                                <a href="#"><span>ATM</span></a> 
-                                
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-credit-card-1"></i>
-                                <a href="card.html"><span>Debit-Card</span></a> 
-                                
-                            </div>
-                        </div>
-                        <!-- Single Icons -->
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="single-icons mb-30">
-                                <i class="icon-wallet"></i>
-                                <a href="#"><span>Wallet</span></a> 
-                                
-                            </div>
+                        <div class="text">
+                            <h5>All the loans</h5>
+                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
                         </div>
                     </div>
                 </div>
-                
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="500ms">
+                        <div class="icon">
+                            <i class="icon-smartphone-1"></i>
+                        </div>
+                        <div class="text">
+                            <h5>Secure financial services</h5>
+                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Service Area -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="single-service-area d-flex mb-100 wow fadeInUp" data-wow-delay="600ms">
+                        <div class="icon">
+                            <i class="icon-diamond"></i>
+                        </div>
+                        <div class="text">
+                            <h5>Good investments</h5>
+                            <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div>
-        <div class="container">
-                <div class="row">
-                    
-                    <!-- ========== Icon Boxes ========== -->
-                    <div class="col-12">
-                        <div class="elements-title mb-30">
-                            
-                            <h2>Benefits</h2>
-                        </div>
-                    </div>
-    
-                    <div class="col-12">
-                        <div class="row">
-                            <!-- Single Service Area -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="single-service-area d-flex mb-100">
-                                    <div class="icon">
-                                        <i class="icon-profits"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>All the loans</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <!-- Single Service Area -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="single-service-area d-flex mb-100">
-                                    <div class="icon">
-                                        <i class="icon-money-1"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>Easy and fast answer</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <!-- Single Service Area -->
-                            <div class="col-12 col-md-6 col-lg-4">
-                                <div class="single-service-area d-flex mb-100">
-                                    <div class="icon">
-                                        <i class="icon-coin"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h5>No additional papers</h5>
-                                        <p>Morbi ut dapibus dui. Sed ut iaculis elit, quis varius mauris. Integer ut ultricies orci, lobortis egestas sem.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
     </section>
-    <!-- ##### Elements Area End ##### -->
-   </div>
-   </div>
+    <!-- ##### Services Area End ###### -->
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer-area section-padding-100-0">
         <div class="container">
@@ -335,6 +330,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         </div>
     </footer>
     <!-- ##### Footer Area Start ##### -->
+
     <!-- ##### All Javascript Script ##### -->
     <!-- jQuery-2.2.4 js -->
     <script src="js/jquery/jquery-2.2.4.min.js"></script>
@@ -346,6 +342,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="js/plugins/plugins.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
+    <!-- JAVASCRIPTS -->
+<script src="layout/scripts/jquery.min.js"></script> 
+<script src="layout/scripts/jquery.mobilemenu.js"></script>
 </body>
 
 </html>

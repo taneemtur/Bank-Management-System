@@ -1,3 +1,37 @@
+<?php
+session_start();
+
+if(isset($_SESSION['usr_id'])!="") {
+	header("Location: index.php");
+}
+
+include 'includes/dbconnect.php';
+
+//check if form is submitted
+if (isset($_POST['login'])) {
+
+	$email = mysqli_real_escape_string($con, $_POST['email']);
+	$password = mysqli_real_escape_string($con, $_POST['password']);
+	$result = mysqli_query($con, "SELECT * FROM customers WHERE emailid = '" . $email. "' and password = '" . $password . "'");
+
+	if ($row = mysqli_fetch_array($result)) {
+		$_SESSION['usr_id'] = $row['customerid'];
+		$_SESSION['usr_name'] = $row['firstname'];
+
+		if($_SESSION['usr_id']==1){
+
+			header("Location: admin.php");
+		}else{
+			
+			header("Location: customer.php");
+		}
+	} else {
+		$errormsg = "Incorrect Email or Password!!!";
+	}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,7 +75,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a href="index.php"><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -77,7 +111,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="index.php">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>                                  
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
@@ -101,9 +135,9 @@
         <div class="row-1">
     <div class="form-1">
         
-        <form method="post" id="regForm" class="registrationForm" autocomplete="off">
+        <form method="post" id="regForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" class="registrationForm" autocomplete="off">
            
-                <div class="form-heading"><h1>Log in</h1></div>
+                <div class="form-heading"><h1>CLient Log in</h1></div>
                 
                 <p>Email: <br>
                     <input type="email" name="email" placeholder="Email" id="email" required>
@@ -113,12 +147,13 @@
             <input type="password" name="password" placeholder="Password" id="password" required>
             </p>
         <!-- <input  type="submit" value="submit" class="submit"> -->
-        <input type="submit" value="SUBMIT" class="submit">
-        <p class="not-registered"><a href="user_account.html">Submit</a></p>
-            <p class="not-registered">Not Registered. <a href="tutorreg.html">Register</a></p>
+        <input type="submit" name = "login" value="login" class="submit" style = "margin-right: 30%; ">
+        <!-- <p class="not-registered"><a href="user_account.html">Submit</a></p> -->
+            
         
         </form> 
-    
+        <span class="text-danger"><?php if (isset($errormsg)) { echo $errormsg; } ?></span>
+
     </div>
     </div> 
     </div>  

@@ -1,3 +1,38 @@
+<?php
+session_start();
+include 'includes/dbconnect.php';
+
+	$success = "";
+
+	if(isset($_POST['submit'])){
+
+		$accname = $_POST['firstname'];
+		$accno = $_POST['accno'];
+		$acciban = $_POST['iban'];
+		$accemail = $_POST['emailid'];
+		$accpassword = $_POST['password'];
+		// $acctype = $_POST['accounttype'];
+		$accbalance = $_POST['accountbalance'];
+		$accdate = date('y-m-d');
+		$ins_sql = "INSERT INTO accounts( accno, customerid,  accountbalance, accopendate) VALUES 
+					('".$accno."', '".$accbalance."', '".$accdate."', '".$accdate."')";
+		$run_sql = mysqli_query($con,$ins_sql);
+
+		$temp = mysqli_affected_rows($con);
+		if($temp>0){
+
+			$in_sql = "INSERT INTO customers(firstname,customerid, iban,emailid, password) VALUES 
+					('".$accname."','".$acciban."', '".$accemail."', '".$accpassword."')";
+			$ru_sql = mysqli_query($con,$in_sql);
+
+			$success = "Account added successfully!";
+		}else{
+
+			$success = "Something went wrong!";
+		}
+
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +74,7 @@
                     <div class="col-12 d-flex justify-content-between">
                         <!-- Logo Area -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Top Contact Info -->
@@ -75,7 +110,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <!-- <li><a href="index.php">Home</a></li>
+                                    <!-- <li><a href="index.html">Home</a></li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="services.html">Services</a>
                                         <div class="dropdown">
@@ -95,7 +130,9 @@
 
                         <!-- Contact -->
                         <div class="contact">
-                            <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a>
+                            <!-- <a href="#"><img src="img/core-img/call2.png" alt=""> +92123456789 </a> -->
+                            <?php if (isset($_SESSION['usr_id']))  ?>
+				            <li><a href="logout.php">Log Out</a></li>
                         </div>
                     </nav>
                 </div>
@@ -145,7 +182,7 @@
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                                 <div class="single-icons mb-30">
                                     <i class="icon-diamond"></i>
-                                    <a href="card.html"><span>Debit Card</span></a>
+                                    <a href="addaccount.php"><span>Add Account</span></a>
                                     
                                 </div>
                             </div>
@@ -153,25 +190,86 @@
                         
                             
                         
-                                <div class="card" style="width: 18rem;">
-                                        
-                                        <div class="card-body">
-                                          <h5 class="card-title">Account Details</h5>
-                                          <p class="card-text">Account Balance: </p>
-                                        </div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item">Transaction Limit: </li>
-                                          <li class="list-group-item">Debit-Card: </li>
-                                        
-                                        </ul>
-                                        <div class="card-body">
-                                          <a href="#" class="card-link">Send Money</a>
-                                          <a href="admin.php" class="card-link">Dashboard</a>
-                                        </div>
-                                      </div>
+                            <div class="container">
+                            <div class="container">
+                            <article class="row">
+		<section class="col-lg-8">
+			<div class="page-header">
+				<h2>Add an account</h2>
+			</div>
+			<form class="form-horizontal" action="addaccount.php" method="post" role="form">
+				<div class="form-group">
+					<label for="name" class="col-sm-3 control-label">Full Name *</label>
+						<div class="col-sm-8">
+							<input type="text" name="firstname" class="form-control" placeholder="Enter your name" id="firstname" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Account number *</label>
+						<div class="col-sm-8">
+							<input type="text" name="accno" class="form-control" placeholder="Enter account number" id="accno" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">IBAN number *</label>
+						<div class="col-sm-8">
+							<input type="text" name="iban" class="form-control" placeholder="Enter IBAN number" id="iban" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Email-address *</label>
+						<div class="col-sm-8">
+							<input type="email" name="emailid" class="form-control" placeholder="Enter Email-address" id="emailid" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Password *</label>
+						<div class="col-sm-8">
+							<input type="password" name="password" class="form-control" placeholder="Enter password" id="password" required>
+						</div>
+				</div>
+				<!-- <div class="form-group">
+					<label for="name" class="col-sm-3 control-label">Account type *</label>
+						<div class="col-sm-8">
+							<select class="form-control" name="accounttype" id="accounttype">
+								<option>Savings</option>
+								<option>Current</option>
+
+							</select>
+						</div>
+				</div> -->
+				<div class="form-group">
+					<label for="number" class="col-sm-3 control-label">Account balance *</label>
+						<div class="col-sm-8">
+							<input type="text" name="accountbalance" class="form-control" placeholder="Enter the balance" id="accountbalance" required>
+						</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-8">
+					<input type="submit" id="submit" name="submit" value = "Submit" class="btn btn-block btn-primary">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"></label>
+					<div class="col-sm-8">
+					<h4><?php echo $success ?></h4>
+					</div>
+				</div>
+				
 
 
+    </article></form>
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            
+                            <i class="icon-purse"></i>
+                         <a href="admin.php"> <span>Dash Board</span></a>  
                         </div>
+</section></article></div>
+		
+		
+    
+    
                     
                         
                         
@@ -187,7 +285,7 @@
     </section>
     <!-- ##### Elements Area End ##### -->
 
-    
+  
         <!-- Copywrite Area -->
         <div class="copywrite-area">
             <div class="container">
