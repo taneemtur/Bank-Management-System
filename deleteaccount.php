@@ -7,22 +7,22 @@ include 'includes/dbconnect.php';
 	if(isset($_POST['submit'])){
 
 		$accno = $_POST['accno'];
-		$accemail = $_POST['accemail'];
+		// $accemail = $_POST['accemail'];
 
-		$i_sql = "SELECT * FROM customers WHERE customerid = '".$accno."'";
+		$i_sql = "SELECT * FROM accounts WHERE accno = '".$accno."'";
 		$r_sql = mysqli_query($con,$i_sql);
 
 		$rows = mysqli_fetch_array($r_sql);
 
-		$email = $rows['emailid'];
+		$accno1 = $rows['accno'];
 
-		if($email==$accemail){
+		if($accno1==$accno){
 
 
-			$ins_sql = "DELETE FROM accounts WHERE customerid ='".$accno."'";
+			$ins_sql = "DELETE FROM accounts WHERE accno ='".$accno."'";
 			$run_sql = mysqli_query($con,$ins_sql);
-			$in_sql = "DELETE FROM customers WHERE emailid ='".$accemail."'";
-			$ru_sql = mysqli_query($con,$in_sql);
+			// $in_sql = "DELETE FROM customers WHERE emailid ='".$accemail."'";
+			// $ru_sql = mysqli_query($con,$in_sql);
 
 			$success = "Account deleted successfully!";
 		}else{
@@ -204,12 +204,12 @@ include 'includes/dbconnect.php';
 							<input type="text" name="accno" class="form-control" placeholder="Enter Account number" id="accno" required>
 						</div>
 				</div>
-				<div class="form-group">
-					<label for="name" class="col-sm-3 control-label">Email-address *</label>
-						<div class="col-sm-8">
-							<input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
-						</div>
-				</div>
+                    <!-- <div class="form-group">
+                        <label for="name" class="col-sm-3 control-label">Email-address *</label>
+                            <div class="col-sm-8">
+                                <input type="email" name="accemail" class="form-control" placeholder="Enter Email-address" id="accemail" required>
+                            </div>
+                    </div> -->
 				<div class="form-group">
 					<label class="col-sm-3 control-label"></label>
 					<div class="col-sm-8">

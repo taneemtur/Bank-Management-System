@@ -7,29 +7,30 @@ include 'includes/dbconnect.php';
 	if(isset($_POST['submit'])){
 
 		$accname = $_POST['firstname'];
-		$accno = $_POST['accno'];
+		// $accno = $_POST['accno'];
 		$acciban = $_POST['iban'];
 		$accemail = $_POST['emailid'];
 		$accpassword = $_POST['password'];
 		// $acctype = $_POST['accounttype'];
 		$accbalance = $_POST['accountbalance'];
 		$accdate = date('y-m-d');
-		$ins_sql = "INSERT INTO accounts( accno, customerid,  accountbalance, accopendate) VALUES 
-					('".$accno."', '".$accbalance."', '".$accdate."', '".$accdate."')";
+		$ins_sql = "INSERT INTO accounts(  iban,  accountbalance, accopendate) VALUES 
+					('".$acciban."', '".$accbalance."', '".$accdate."', '".$accdate."')";
 		$run_sql = mysqli_query($con,$ins_sql);
+        $success = "Account added successfully!";
 
-		$temp = mysqli_affected_rows($con);
-		if($temp>0){
+		// $temp = mysqli_affected_rows($con);
+		// if($temp>0){
 
-			$in_sql = "INSERT INTO customers(firstname,customerid, iban,emailid, password) VALUES 
-					('".$accname."','".$acciban."', '".$accemail."', '".$accpassword."')";
-			$ru_sql = mysqli_query($con,$in_sql);
+		// 	$in_sql = "INSERT INTO customers(firstname,customerid, iban,emailid, password) VALUES 
+		// 			('".$accname."','".$acciban."', '".$accemail."', '".$accpassword."')";
+		// 	$ru_sql = mysqli_query($con,$in_sql);
 
-			$success = "Account added successfully!";
-		}else{
+		// 	$success = "Account added successfully!";
+		// }else{
 
-			$success = "Something went wrong!";
-		}
+		// 	$success = "Something went wrong!";
+		// }
 
 	}
 ?>
@@ -169,10 +170,11 @@ include 'includes/dbconnect.php';
                 <div class="col-12">
                     <div class="elements-title mb-30">
                         <div class="line"></div>
-                        <h2>User DashBoard</h2>
+                        <h2>Admin DashBoard</h2>
                     </div>
                 </div>
-                
+                <h3>Admin <?php echo $_SESSION['usr_name']; ?></h3>
+
                 <div class="col-12 mb-70">
                     <div class="row">
                         
@@ -204,12 +206,12 @@ include 'includes/dbconnect.php';
 							<input type="text" name="firstname" class="form-control" placeholder="Enter your name" id="firstname" required>
 						</div>
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="number" class="col-sm-3 control-label">Account number *</label>
 						<div class="col-sm-8">
 							<input type="text" name="accno" class="form-control" placeholder="Enter account number" id="accno" required>
 						</div>
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label for="number" class="col-sm-3 control-label">IBAN number *</label>
 						<div class="col-sm-8">
@@ -239,7 +241,7 @@ include 'includes/dbconnect.php';
 						</div>
 				</div> -->
 				<div class="form-group">
-					<label for="number" class="col-sm-3 control-label">Account balance *</label>
+					<label for="number" class="col-sm-3 control-label">Account balance*</label>
 						<div class="col-sm-8">
 							<input type="text" name="accountbalance" class="form-control" placeholder="Enter the balance" id="accountbalance" required>
 						</div>
