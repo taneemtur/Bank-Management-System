@@ -17,10 +17,6 @@ CREATE TABLE IF NOT EXISTS accountmaster (
 );
 
 
-INSERT INTO accountmaster (accounttype, prefix, minbalance, interest) VALUES 
-('current', 'cur', 500, 0.5),
-('Savings', 'sv', 4000.00, 1.5),
-('Student', 'stu', 500.00, 2.00);
 
 
 DROP TABLE IF EXISTS accounts;
@@ -35,10 +31,7 @@ CREATE TABLE IF NOT EXISTS accounts (
 );
 
 
-INSERT INTO `accounts` (`accno`, `customerid`, `accstatus`, `accopendate`, `accounttype`, `accountbalance`) VALUES
-('415236', 98682, 'active', '2013-02-02', 'Savings', 12574.00),
-('516267', 98680, 'active', '2013-02-02', 'Current', 1000000.00),
-('78312', 98683, 'active', '2013-02-09', 'Savings', 5000.00);
+
 
 
 DROP TABLE IF EXISTS branch;
@@ -53,9 +46,6 @@ CREATE TABLE IF NOT EXISTS branch (
   PRIMARY KEY (iban)
 );
 
-INSERT INTO `branch` (`iban`, `branchname`, `city`, `branchaddress`, `state`, `country`, `pincode`) VALUES
-('KHI2345', 'Head office', 'Karachi', 'National Highway 5', 'Sindh', 'Pakistan', 122413),
-('ISL1234', 'Head office', 'Islamabad', 'Express Highway', 'Punjab', 'Pakistan', 155200);
 
 
 DROP TABLE IF EXISTS customers;
@@ -77,10 +67,6 @@ CREATE TABLE IF NOT EXISTS customers (
 );
 
 
-INSERT INTO `customers` (`customerid`, `iban`, `firstname`, `lastname`, `emailid`, `password`, `transpassword`, `accstatus`, `city`, `state`, `country`, `accopendate`, `lastlogin`) VALUES
-(98680, 'KHI2345', 'Ali', 'Zafar', 'ali@gmail.com', 'ali', '12345', 'ACTIVE', 'Karachi', 'Sindh', 'Pakistan', '2019-02-02', '2019-07-06 06:23:03'),
-(98682, 'KHI2345', 'Rafay', 'Marif', 'rafay@gmail.com', 'rafay', '12345', 'ACTIVE', 'Karachi', 'Sindh', 'Pakistan', '2019-02-02', '2019-07-03 05:54:11'),
-(98683, 'ISL1234', 'Talha', 'Habib', 'talha@gmail.com', 'talha', '12345', 'ACTIVE', 'Islamabad', 'Sindh', 'Pakistan', '2019-02-09', '2019-07-04 08:37:40');
 
 DROP TABLE IF EXISTS employees;
 CREATE TABLE IF NOT EXISTS employees (
@@ -95,9 +81,6 @@ CREATE TABLE IF NOT EXISTS employees (
 );
 
 
-INSERT INTO `employees` (`empid`, `empname`,  `password`, `emailid`, `contactno`, `createdat`, `last_login`) VALUES 
-(313786, 'Mustafa', '1234', 'mustafa@gmail.com', '03332589785', '2019-11-11', '0000-00-00 00:00:00'),
-(313787, 'Danish', '1234', 'danish@yahoo.com', '03332589787', '2019-11-06', '0000-00-00 00:00:00');
 
 
 DROP TABLE IF EXISTS loan;
@@ -124,8 +107,6 @@ CREATE TABLE IF NOT EXISTS loanpayment (
 );
 
 
-INSERT INTO `loanpayment` (`paymentid`, `date`, `paidamount`, `principleamount`, `balance`) VALUES
-(2147483647, '2019-11-26', 10000.00, 1000, 12000);
 
 DROP TABLE IF EXISTS loantype;
 CREATE TABLE IF NOT EXISTS loantype (
@@ -139,10 +120,6 @@ CREATE TABLE IF NOT EXISTS loantype (
 
 
 
-INSERT INTO `loantype` (`loantype`, `prefix`, `maximumamount`, `minimumamount`, `interest`, `status`) VALUES
-('Car', 'car', 100000000.00, 100000.00, 8.00, ''),
-('Current', 'cr', 70000.00, 50000.00, 3000.00, 'active'),
-('homeloan', 'hl', 1000000.00, 50000.00, 65.09, 'active');
 
 
 DROP TABLE IF EXISTS registered_payee;
@@ -157,9 +134,6 @@ CREATE TABLE IF NOT EXISTS registered_payee (
 );
 
 
-INSERT INTO `registered_payee` (`slno`, `payeename`, `accno`, `accounttype`, `bankname`, `iban`) VALUES
-(67543, 'Vishesh', '126548', 'Current', 'AL-Habib', 'PSH1234'),
-(67544, 'Kashif', '265487', 'Saving', 'HBL', 'HYD2133');
 
 
 DROP TABLE IF EXISTS transactions;
@@ -174,10 +148,6 @@ CREATE TABLE IF NOT EXISTS transactions (
 );
 
 
-INSERT INTO `transactions` (`transactionid`, `paymentdate`, `payeeid`, `receiveid`, `amount`, `paymentstate`) VALUES
-(1, '2019-07-03 12:16:15', 4666, 67543, 1234, 'active'),
-(2, '2019-07-03 05:40:33', 98683, 67543, 2232, 'active'),
-(3, '2019-07-03 07:45:13', 98683, 67543, 10212, 'active');
 
 ALTER TABLE accounts
     add constraint fk1_Accounts foreign key (customerid) references customers(customerid);
